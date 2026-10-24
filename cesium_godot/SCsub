@@ -36,6 +36,8 @@ sources = [
     cesium_build_utils.get_root_dir() + "/Models/CesiumGDConfig.cpp",
     cesium_build_utils.get_root_dir() + "/Models/CesiumHTTPRequestNode.cpp",
     cesium_build_utils.get_root_dir() + "/Models/CesiumGDCreditSystem.cpp",
+    # Add this line (adjust the folder path if it's placed elsewhere):
+    cesium_build_utils.get_root_dir() + "/Models/CesiumPropertyInfo.cpp", 
     cesium_build_utils.get_root_dir() + "/Implementations/NetworkAssetAccessor.cpp",
     cesium_build_utils.get_root_dir() + "/Implementations/DocumentContainer.cpp",
     cesium_build_utils.get_root_dir() + "/Implementations/GodotPrepareRenderResources.cpp",
