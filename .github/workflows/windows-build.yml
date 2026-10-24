@@ -1,4 +1,5 @@
-name: Windows Double & Single Precision Builds v14
+
+name: Windows Double & Single Precision Builds Oct2026
 
 on:
   push:
@@ -33,7 +34,6 @@ jobs:
             git -C vcpkg fetch --all --tags
             git -C vcpkg pull --ff-only
           }
-
       - &pin_cesium_native_vcpkg_step
         name: Pin cesium-native vcpkg baseline
         shell: pwsh
@@ -50,19 +50,16 @@ jobs:
           git -C $nativeDir -c advice.detachedHead=false checkout $nativeCommit
           git -C $nativeDir submodule sync --recursive
           git -C $nativeDir submodule update --init --recursive --force
-
           $cmakeFile = Join-Path $nativeDir "CMakeLists.txt"
           $oldPin = "COMMIT dbe35ceb30c688bf72e952ab23778e009a578f18"
           $newPin = "COMMIT 2025.09.17"
           $content = Get-Content -Path $cmakeFile -Raw
-
           if ($content.Contains($oldPin)) {
             $content = $content.Replace($oldPin, $newPin)
             Set-Content -Path $cmakeFile -Value $content -NoNewline -Encoding utf8NoBOM
           } elseif (-not $content.Contains($newPin)) {
             throw "Expected ezvcpkg commit pin not found in $cmakeFile"
           }
-
       - name: Set up Python 3.8
         uses: actions/setup-python@v5
         with:
@@ -109,7 +106,6 @@ jobs:
             git -C vcpkg fetch --all --tags
             git -C vcpkg pull --ff-only
           }
-
       - *pin_cesium_native_vcpkg_step
 
       - name: Set up Python 3.8
@@ -137,3 +133,4 @@ jobs:
         with:
           name: godot3dtiles-single-precision-dev
           path: godot3dtiles/
+          
